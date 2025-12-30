@@ -18,10 +18,7 @@ export const TrackingCard = ({ parcel, invoice }: TrackingCardProps) => {
 
   const mergedEvents = useMemo(() => {
     const baseEvents = parcel?.events || parcel || [];
-    const merged = mergeAndNormalizeEvents(baseEvents, hmHistory || {});
-    
-   
-    return merged;
+    return mergeAndNormalizeEvents(baseEvents, hmHistory || {});
   }, [parcel, hmHistory]);
 
   if (!parcel) return null;
