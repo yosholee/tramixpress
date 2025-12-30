@@ -2,8 +2,7 @@ import {
   Plane,
   Package,
   Container,
-  Home,
-  CheckCircle,
+  Home
 } from "lucide-react";
 
 export const content = {
@@ -140,7 +139,7 @@ export const content = {
     },
     contact: {
       phone: "(941) 278-2357",
-      email: "tramixpress2.llc@gmail.com",
+      email: "tramiXpress.llc@gmail.com",
       address: "1201 9th ST W, Bradenton, FL",
     },
     footer: {
