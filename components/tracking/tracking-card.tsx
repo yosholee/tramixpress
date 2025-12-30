@@ -17,10 +17,11 @@ export const TrackingCard = ({ parcel, invoice }: TrackingCardProps) => {
   );
 
   const mergedEvents = useMemo(() => {
-    // Ensure we pass the bare events array if available, or the parcel itself depending on structure
-    // mergeAndNormalizeEvents handles various inputs, passing parcel.events is usually safest if it exists
     const baseEvents = parcel?.events || parcel || [];
-    return mergeAndNormalizeEvents(baseEvents, hmHistory || {});
+    const merged = mergeAndNormalizeEvents(baseEvents, hmHistory || {});
+    
+   
+    return merged;
   }, [parcel, hmHistory]);
 
   if (!parcel) return null;

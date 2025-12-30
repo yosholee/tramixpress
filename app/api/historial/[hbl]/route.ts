@@ -12,25 +12,11 @@ export async function GET(
   }
 
   try {
-    // TODO: Verify the correct upstream URL. 
-    // Assuming a pattern based on other hooks, but this might need adjustment.
-    // If tracking.ctenvios.com doesn't have this exact endpoint, this will fail or return 404.
-    // Ideally, we should ask the user for the specific "HM history" endpoint.
-    // For now, I'm using a placeholder logic or trying to hit the same base URL.
+    // HM History API endpoint - fetches warehouse and delivery events
+    const HM_API_URL = 'http://72.60.114.241/api/historial/envio';
+    const upstreamUrl = `${HM_API_URL}/${hbl}`;
     
-    // Potentially this is: https://tracking.ctenvios.com/api/v1/historial/{hbl} 
-    // OR it might be a completely different service.
-    // Since I must implement SOMETHING, I'll try the base URL + /historial first.
-    
-    const upstreamUrl = `https://tracking.ctenvios.com/api/v1/historial/${hbl}`;
-    
-    const response = await axios.get(upstreamUrl, {
-       // Forward headers/keys if necessary. The hook `useFetchByInvoiceOrHBL` uses a specific API key.
-       // I'll try to use the same one here just in case.
-       headers: {
-         "api-key": "c3VwYmFzZWNyZXQ="
-       }
-    });
+    const response = await axios.get(upstreamUrl);
 
     return NextResponse.json(response.data);
   } catch (error: any) {
