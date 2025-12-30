@@ -6,9 +6,19 @@ import { Search, Clock, ShieldCheck, HeadphonesIcon } from "lucide-react";
 import { useLanguage } from "@/components/language-provider";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export function Hero() {
   const { t } = useLanguage();
+  const router = useRouter();
+  const [trackingId, setTrackingId] = useState("");
+
+  const handleSearch = () => {
+    if (trackingId.trim()) {
+      router.push(`/tracking/${trackingId.trim()}`);
+    }
+  };
 
   return (
     <section className="relative overflow-hidden bg-background text-foreground py-24 md:py-32 lg:py-40">
@@ -73,9 +83,16 @@ export function Hero() {
                 <Input 
                   className="w-full pl-10 h-12 rounded-full bg-transparent border-none text-base focus-visible:ring-0 placeholder:text-muted-foreground/70"
                   placeholder={t.hero.placeholder}
+                  value={trackingId}
+                  onChange={(e) => setTrackingId(e.target.value)}
+                  onKeyDown={(e) => e.key === "Enter" && handleSearch()}
                 />
               </div>
-              <Button size="lg" className="rounded-full h-12 px-8 bg-orange-600 hover:bg-orange-700 dark:bg-orange-500 dark:hover:bg-orange-600 text-white font-bold">
+              <Button 
+                size="lg" 
+                className="rounded-full h-12 px-8 bg-orange-600 hover:bg-orange-700 dark:bg-orange-500 dark:hover:bg-orange-600 text-white font-bold"
+                onClick={handleSearch}
+              >
                 {t.hero.track}
               </Button>
             </div>
